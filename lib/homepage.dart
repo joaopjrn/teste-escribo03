@@ -1,5 +1,6 @@
 import 'package:escribo03/appbar/my_tab.dart';
 import 'package:escribo03/filmes/filmes_page.dart';
+import 'package:escribo03/personagens/personagens_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,8 +47,8 @@ class _HomePageState extends State<HomePage> {
   Widget _body(){
     return TabBarView(
       children: [
-        FilmesPage(),
-        Center(),
+        Center(child: FilmesPage()),
+        Center(child: PersonagensPage(),),
         Center()
       ]
     );

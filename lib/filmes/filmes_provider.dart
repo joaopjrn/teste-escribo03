@@ -13,14 +13,11 @@ class Filmes with ChangeNotifier {
   Future fetchFilmes() async {
     if(_filmes.isEmpty){
       if(!isFetching){
-        print('start fetching2');
         isFetching = true;
         var resp = await http.get(Uri.parse('https://swapi.dev/api/films/?format=json'));
-        print('done fetching');
         Map<String, dynamic> data = json.decode(resp.body);
         List results = data['results'];
         _filmes = results.map((item) => Filme(id: item['episode_id'], title: item['title'])).toList();
-        print(_filmes);
         isFetching = false;
         firstLoad = true;
         notifyListeners();

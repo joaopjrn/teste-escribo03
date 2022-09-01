@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:escribo03/filmes/filmes_provider.dart';
 import 'package:escribo03/helpers/http_override.dart';
 import 'package:escribo03/homepage.dart';
+import 'package:escribo03/personagens/personagens_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Filmes())
+        ChangeNotifierProvider(create: (context) => Filmes()),
+        ChangeNotifierProvider(create: (context) => Personagens()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
