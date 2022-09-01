@@ -1,4 +1,5 @@
 import 'package:escribo03/outros/my_list_item.dart';
+import 'package:escribo03/personagens/personagem_model.dart';
 import 'package:escribo03/personagens/personagens_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,19 +13,15 @@ class PersonagensPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Provider.of<Personagens>(context, listen: false).fetchPersonagens(),
-      builder: (ctx, AsyncSnapshot snap) {
+      future: Provider.of<Personagens>(context).fetchPersonagens(),
+      builder: (ctx, AsyncSnapshot<List<Personagem>> snap) {
         var conn = snap.connectionState;
-        print(conn);
-        return Consumer<Personagens>(
-          builder: (context, value, _) {
             return conn == ConnectionState.done ? ListView.builder(
-              itemCount: value.personagens.length,
-              itemBuilder: (ctx, i) => MyListItem(item: value.personagens[i])
+              itemCount: snap.data?.length,
+              itemBuilder: (ctx, i) => MyListItem(item: snap.data?[i])
             ) : CircularProgressIndicator();
           },
         );
-      },
-    );
+
   }
 }

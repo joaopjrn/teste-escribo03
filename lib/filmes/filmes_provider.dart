@@ -10,7 +10,7 @@ class Filmes with ChangeNotifier {
   bool isFetching = false;
   bool firstLoad = false;
 
-  Future fetchFilmes() async {
+  Future<List<Filme>> fetchFilmes() async {
     if(_filmes.isEmpty){
       if(!isFetching){
         isFetching = true;
@@ -23,5 +23,6 @@ class Filmes with ChangeNotifier {
         notifyListeners();
       }
     }
+        return filmes;
   }
 }

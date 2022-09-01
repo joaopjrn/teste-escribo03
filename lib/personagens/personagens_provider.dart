@@ -9,8 +9,7 @@ class Personagens with ChangeNotifier {
   List<Personagem> get personagens => [..._personagens];
   bool isFetching = false;
 
-  Future fetchPersonagens() async {
-    try {      
+  Future<List<Personagem>> fetchPersonagens() async {
     if(_personagens.isEmpty){
       if(!isFetching){
         print('fetching personagens');
@@ -28,9 +27,7 @@ class Personagens with ChangeNotifier {
         notifyListeners();
       }
     }
-    } catch (e) {
-      print(e);
-    }
+    return personagens;
   }
 
 }

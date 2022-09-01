@@ -1,3 +1,4 @@
+import 'package:escribo03/filmes/filme_model.dart';
 import 'package:escribo03/filmes/filmes_provider.dart';
 import 'package:escribo03/outros/my_list_item.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,19 +13,15 @@ class FilmesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Provider.of<Filmes>(context, listen: false).fetchFilmes(),
-      builder: (ctx, AsyncSnapshot snap) {
+      future: Provider.of<Filmes>(context).fetchFilmes(),
+      builder: (ctx, AsyncSnapshot<List<Filme>> snap) {
         var conn = snap.connectionState;
         print(conn);
-        return Consumer<Filmes>(
-          builder: (context, value, _) {
             return conn == ConnectionState.done ? ListView.builder(
-              itemCount: value.filmes.length,
-              itemBuilder: (ctx, i) => MyListItem(item: value.filmes[i])
+              itemCount: snap.data?.length,
+              itemBuilder: (ctx, i) => MyListItem(item: snap.data?[i])
             ) : CircularProgressIndicator();
           },
         );
-      },
-    );
   }
 }
