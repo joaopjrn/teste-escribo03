@@ -5,10 +5,10 @@ import 'package:flutter/cupertino.dart';
 class Favoritos with ChangeNotifier {
   List<Favorito> _favoritos = [];
   List<Favorito> get favoritos => [..._favoritos];
-  bool fetched = false;
+  bool _fetched = false;
   
   Future<List<Favorito>> fetchFavoritos() async {
-    if(!fetched){
+    if(!_fetched){
     var data = await DBHelper.getData('favoritos');
     _favoritos = data.map((item) {
       return Favorito(
@@ -16,7 +16,7 @@ class Favoritos with ChangeNotifier {
         tipo: (item['tipo'] as String).contains('filme') ? Tipo.Filme : Tipo.Personagem
       );
     }).toList();
-    fetched = true;
+    _fetched = true;
     notifyListeners();
     }
     return favoritos;

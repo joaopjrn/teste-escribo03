@@ -1,11 +1,6 @@
 import 'package:escribo03/avatar/avatar_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttermoji/fluttermoji.dart';
-import 'package:fluttermoji/fluttermojiCircleAvatar.dart';
-import 'package:flutter_svg/flutter_svg.dart' as svg;
 import 'package:provider/provider.dart';
 
 class AvatarPage extends StatelessWidget {
@@ -21,16 +16,11 @@ class AvatarPage extends StatelessWidget {
           child: Container(
             color: Colors.grey[300],
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-              IconButton(
-                onPressed: (){}, 
-                icon: Icon(Icons.keyboard_backspace), 
-                ),
               IconButton(
                 onPressed: () async {
                   await Provider.of<MyAvatar>(context, listen: false).saveAvatar(await FluttermojiFunctions().encodeMySVGtoMap());
-                  // print(await FluttermojiFunctions().encodeMySVGtoString());
                 }, 
                 icon: const Icon(Icons.save), 
                 ),

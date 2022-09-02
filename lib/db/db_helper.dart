@@ -68,12 +68,11 @@ class DBHelper {
   
   static Future update(String tabela, dynamic data) async {
     final db = await DBHelper.database();
-    var up = await db.update(
+    await db.update(
       'avatar', 
       data,
       where: '_id = ?',
       whereArgs: ['myavatar']);
-      print(up);
   }
 
   static Future<List<Map<String, dynamic>>> getData(String tabela) async {

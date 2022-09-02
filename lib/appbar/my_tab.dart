@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class MyTab extends StatelessWidget {
   final String txt;
@@ -11,12 +9,12 @@ class MyTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon),
-          SizedBox(width: 10,),
+          const SizedBox(width: 10,),
           Text(txt)
         ],
       ),

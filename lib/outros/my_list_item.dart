@@ -1,10 +1,7 @@
-import 'package:escribo03/db/db_helper.dart';
 import 'package:escribo03/favoritos/favoritos_provider.dart';
 import 'package:escribo03/filmes/filme_model.dart';
 import 'package:escribo03/personagens/personagem_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class MyListItem extends StatefulWidget {
@@ -59,10 +56,6 @@ class _MyListItemState extends State<MyListItem> {
               'tipo': widget.item is Filme ? 'filme' : 'personagem'
               }
             );
-            // print(await DBHelper.insert('favoritos', {
-            //   '_id': widget.item.id,
-            //   'tipo': widget.item is Filme ? 'filme' : 'personagem'
-            // }));
           }, 
           icon: Icon(widget.isFav ? Icons.star : Icons.star_border, color: Colors.yellow[700],)),
       ),

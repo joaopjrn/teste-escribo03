@@ -2,8 +2,6 @@ import 'package:escribo03/favoritos/favorito_model.dart';
 import 'package:escribo03/filmes/filmes_provider.dart';
 import 'package:escribo03/personagens/personagens_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class ItemFavorito extends StatelessWidget {

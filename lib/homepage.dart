@@ -5,9 +5,8 @@ import 'package:escribo03/avatar/avatar_page.dart';
 import 'package:escribo03/avatar/avatar_provider.dart';
 import 'package:escribo03/favoritos/favorito_model.dart';
 import 'package:escribo03/favoritos/favoritos_provider.dart';
-import 'package:escribo03/favoritos/favoritos_page.dart';
-import 'package:escribo03/filmes/filmes_page.dart';
-import 'package:escribo03/personagens/personagens_page.dart';
+import 'package:escribo03/filmes/filmes_provider.dart';
+import 'package:escribo03/personagens/personagens_provider.dart';
 import 'package:escribo03/tabs/tabs_page.dart';
 import 'package:escribo03/webview/webview_page.dart';
 import 'package:flutter/material.dart';
@@ -29,30 +28,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String title = "Star Wars Fans";
-  Page page = Page.Tabs;
+  String _title = "Star Wars Fans";
+  Page _page = Page.Tabs;
 
   void _setPage(Page p) {
     setState(() {
-      if (p == page) {
-        page = Page.Tabs;
+      if (p == _page) {
+        _page = Page.Tabs;
       } else {
-        page = p;
+        _page = p;
       }
       _setTitle();
     });
   }
 
   void _setTitle(){
-    switch (page) {
+    switch (_page) {
       case Page.WebView:
-        title = "Website";
+        _title = "Website";
         break;
       case Page.Avatar:
-        title = "Customize seu Avatar!";
+        _title = "Customize seu Avatar!";
         break;
       default:
-      title = "Star Wars Fans";
+      _title = "Star Wars Fans";
     }
   }
 
@@ -68,56 +67,43 @@ class _HomePageState extends State<HomePage> {
   AppBar _myAppbar(){
     Provider.of<MyAvatar>(context, listen: false).fetchAvatar();
     return AppBar(
-      title: Text(title, style: const TextStyle(color: Colors.white)),
+      title: Text(_title, style: const TextStyle(color: Colors.white)),
       backgroundColor: Colors.grey[900],
       centerTitle: true,
       leading: IconButton(
-          onPressed: ()=>_setPage(Page.WebView), 
-          icon: const Icon(Icons.public)),
+        onPressed: (){
+          if(!Provider.of<Filmes>(context, listen: false).isFetching && 
+            !Provider.of<Personagens>(context, listen: false).isFetching){
+              _setPage(Page.WebView);
+            }
+          }, 
+        icon: const Icon(Icons.public)),
       actions: [
         Consumer<MyAvatar>(
           builder: (context, value, _) {
-            print('teste');
             return InkWell(
-            borderRadius: BorderRadius.circular(50),
-            onTap: ()=>_setPage(Page.Avatar),
-            child: svg.SvgPicture.string(
-              FluttermojiFunctions().decodeFluttermojifromString(jsonEncode(value.defAavatar)),
-              height: 40,
-              ),
+              borderRadius: BorderRadius.circular(50),
+              onTap: (){
+                if(!Provider.of<Filmes>(context, listen: false).isFetching && 
+                !Provider.of<Personagens>(context, listen: false).isFetching){
+                  _setPage(Page.Avatar);
+                }
+              },
+              child: svg.SvgPicture.string(
+                FluttermojiFunctions().decodeFluttermojifromString(jsonEncode(value.defAavatar)),
+                height: 40,
+                ),
           );
           },
-        )
-        // FutureBuilder(
-        //   future: Provider.of<MyAvatar>(context).fetchAvatar(),
-        //   builder: (ctx, AsyncSnapshot snap) {
-        //     var conn = snap.connectionState;
-        //     print('avatar');
-        //     print(conn);
-        //     return conn == ConnectionState.done ? Consumer<MyAvatar>(
-        //       builder: (context, value, _) {
-        //         return InkWell(
-        //         borderRadius: BorderRadius.circular(50),
-        //         onTap: ()=>_setPage(Page.Avatar),
-        //         child: svg.SvgPicture.string(
-        //           FluttermojiFunctions().decodeFluttermojifromString(snap.data),
-        //           height: 40,
-        //           ),
-        //       );
-        //       },
-        //     ) : Icon(Icons.person);
-        //   //   return IconButton(
-        //   // onPressed: ()=>_setPage(Page.Avatar), 
-        //   // icon: const Icon(Icons.person));
-        //   },
-        // )
+        ),
+        const SizedBox(width: 8,)
       ],
-      bottom: page == Page.Tabs ? _myTabbar() : null,
+      bottom: _page == Page.Tabs ? _myTabbar() : null,
     );
   }
 
   Widget _body(){
-    switch (page) {
+    switch (_page) {
       case Page.WebView:
         return const WebviewPage();
       case Page.Avatar:
@@ -138,9 +124,8 @@ class _HomePageState extends State<HomePage> {
             future: Provider.of<Favoritos>(context, listen: false).fetchFavoritos(),
             builder: (ctx, AsyncSnapshot<List<Favorito>> snap) {
               var conn = snap.connectionState;
-              print(conn);
               return conn == ConnectionState.done && !snap.hasError ? _body()
-              : CircularProgressIndicator();
+              : const CircularProgressIndicator();
             },
           ),
         ),

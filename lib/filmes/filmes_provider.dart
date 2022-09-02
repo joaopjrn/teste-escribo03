@@ -7,19 +7,21 @@ import 'package:http/http.dart' as http;
 class Filmes with ChangeNotifier {
   List<Filme> _filmes = [];
   List<Filme> get filmes => [..._filmes];
-  bool isFetching = false;
-  bool firstLoad = false;
+  bool _isFetching = false;
+  bool _firstLoad = false;
+  bool get isFetching => _isFetching;
+  bool get firstLoad => _firstLoad;
 
   Future<List<Filme>> fetchFilmes() async {
     if(_filmes.isEmpty){
       if(!isFetching){
-        isFetching = true;
+        _isFetching = true;
         var resp = await http.get(Uri.parse('https://swapi.dev/api/films/?format=json'));
         Map<String, dynamic> data = json.decode(resp.body);
         List results = data['results'];
         _filmes = results.map((item) => Filme(id: item['episode_id'], title: item['title'])).toList();
-        isFetching = false;
-        firstLoad = true;
+        _isFetching = false;
+        _firstLoad = true;
         notifyListeners();
       }
     }

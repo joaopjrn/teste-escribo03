@@ -2,8 +2,6 @@ import 'package:escribo03/favoritos/favoritos_page.dart';
 import 'package:escribo03/filmes/filmes_page.dart';
 import 'package:escribo03/personagens/personagens_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class TabsPage extends StatelessWidget {
   const TabsPage({Key? key}) : super(key: key);

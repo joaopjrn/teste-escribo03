@@ -1,5 +1,3 @@
-import 'package:provider/provider.dart';
-
 enum Tipo {
   Filme,
   Personagem
@@ -11,8 +9,4 @@ class Favorito {
   bool isFavorite;
 
   Favorito({required this.id, required this.tipo, this.isFavorite = false});
-
-  getFavStatus(){
-    
-  }
 }

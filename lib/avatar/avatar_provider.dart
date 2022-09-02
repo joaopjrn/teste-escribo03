@@ -14,16 +14,12 @@ class MyAvatar with ChangeNotifier {
 
   Future<void> fetchAvatar() async {
     var resp = await DBHelper.getData('avatar');
-    print('###########################');
-    print(resp.length);
     if(resp.isEmpty){
       await DBHelper.insert('avatar', defAavatar);
-      // return jsonEncode(defAavatar);
     }else{
       _defAvatar = resp.first;
     }
     notifyListeners();
-    // return jsonEncode(defAavatar);
   }
 
   Future saveAvatar(Map<String, dynamic> data) async {

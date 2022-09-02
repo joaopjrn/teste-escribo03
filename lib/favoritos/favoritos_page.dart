@@ -2,10 +2,7 @@ import 'package:escribo03/favoritos/favoritos_provider.dart';
 import 'package:escribo03/favoritos/item_favorito.dart';
 import 'package:escribo03/filmes/filmes_provider.dart';
 import 'package:escribo03/personagens/personagens_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class FavoritosPage extends StatelessWidget {
@@ -21,11 +18,13 @@ class FavoritosPage extends StatelessWidget {
     if(pp.personagens.isEmpty && !pp.isFetching) Provider.of<Personagens>(context, listen: false).fetchPersonagens();
     bool loaded = pf.filmes.isNotEmpty && pp.personagens.isNotEmpty;
 
-    return loaded ? ListView.builder(
+    return loaded && pfav.favoritos.isNotEmpty ? ListView.builder(
       itemCount: pfav.favoritos.length,
       itemBuilder: (ctx, i) {
         return ItemFavorito(item: pfav.favoritos[i]);
       }
-    ) : CircularProgressIndicator();
+    ) 
+    : loaded && pfav.favoritos.isEmpty 
+    ? const Center(child: Text('Nenhum favorito adicionado!'),) : const CircularProgressIndicator();
   }
 }
