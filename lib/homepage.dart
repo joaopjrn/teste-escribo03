@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
 
   AppBar _myAppbar(){
     return AppBar(
-      title: Text(title, style: TextStyle(color: Colors.white)),
+      title: Text(title, style: const TextStyle(color: Colors.white)),
       backgroundColor: Colors.grey[900],
       centerTitle: true,
       leading: IconButton(

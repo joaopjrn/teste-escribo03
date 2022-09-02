@@ -13,6 +13,21 @@ class DBHelper {
           `tipo` VARCHAR(255) NOT NULL,
           PRIMARY KEY (`_id`)
         );
+        CREATE TABLE `avatar` (
+          `topType` INT NOT NULL,
+          `accessoriesType` INT NOT NULL,
+          `hairColor` INT NOT NULL,
+          `facialHairType` INT NOT NULL,
+          `facialHairColor` INT NOT NULL,
+          `clotheType` INT NOT NULL,
+          `eyeType` INT NOT NULL,
+          `eyebrowType` INT NOT NULL,
+          `mouthType` INT NOT NULL,
+          `skinColor` INT NOT NULL,
+          `clotheColor` INT NOT NULL,
+          `style` INT NOT NULL,
+          `graphicType` INT NOT NULL
+        );
       ''');
       }, version: 1);
   }
