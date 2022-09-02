@@ -1,11 +1,20 @@
 import 'package:escribo03/appbar/my_tab.dart';
+import 'package:escribo03/avatar/avatar_page.dart';
 import 'package:escribo03/favoritos/favorito_model.dart';
 import 'package:escribo03/favoritos/favoritos_provider.dart';
 import 'package:escribo03/filmes/favoritos_page.dart';
 import 'package:escribo03/filmes/filmes_page.dart';
 import 'package:escribo03/personagens/personagens_page.dart';
+import 'package:escribo03/tabs/tabs_page.dart';
+import 'package:escribo03/webview/webview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+enum Page {
+  Tabs,
+  WebView,
+  Avatar
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,11 +25,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String title = "Star Wars Fans";
+  Page page = Page.Tabs;
 
-  // void _incrementCounter() {
-  //   setState(() {
-  //   });
-  // }
+  void _setPage(Page p) {
+    setState(() {
+      if (p == page) {
+        page = Page.Tabs;
+      } else {
+        page = p;
+      }
+      _setTitle();
+    });
+  }
+
+  void _setTitle(){
+    switch (page) {
+      case Page.WebView:
+        title = "Website";
+        break;
+      case Page.Avatar:
+        title = "Customize seu Avatar!";
+        break;
+      default:
+      title = "Star Wars Fans";
+    }
+  }
 
   TabBar _myTabbar(){
     return const TabBar(tabs: <Widget> [
@@ -37,25 +66,26 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[900],
       centerTitle: true,
       leading: IconButton(
-          onPressed: (){}, 
+          onPressed: ()=>_setPage(Page.WebView), 
           icon: const Icon(Icons.public)),
       actions: [
         IconButton(
-          onPressed: (){}, 
+          onPressed: ()=>_setPage(Page.Avatar), 
           icon: const Icon(Icons.person))
       ],
-      bottom: _myTabbar(),
+      bottom: page == Page.Tabs ? _myTabbar() : null,
     );
   }
 
   Widget _body(){
-    return const TabBarView(
-      children: [
-        Center(child: FilmesPage()),
-        Center(child: PersonagensPage(),),
-        Center(child: FavoritosPage(),)
-      ]
-    );
+    switch (page) {
+      case Page.WebView:
+        return const WebviewPage();
+      case Page.Avatar:
+        return const AvatarPage();
+      default:
+        return const TabsPage();
+    }
   }
 
   @override
