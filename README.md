@@ -1,16 +1,24 @@
-# escribo03
+# Teste Técnico 03 - Escribo
 
-A new Flutter project.
+**Descrição**
 
-## Getting Started
+Desenvolver um aplicativo de listagem de filmes e personagens de Star Wars
 
-This project is a starting point for a Flutter application.
+## Preview
 
-A few resources to get you started if this is your first Flutter project:
+<img src="https://user-images.githubusercontent.com/89490762/188228142-cf7c8d52-78fb-4e07-9b2c-b9cf066e50b6.jpg" alt="" style="width: 30%;">
+<img src="https://user-images.githubusercontent.com/89490762/188228154-a0d92c3b-66e3-4061-a33d-76a6f0fdf201.jpg" alt="" style="width: 30%;">
+<img src="https://user-images.githubusercontent.com/89490762/188228155-f3e58178-0940-4e30-a42c-e54e5f9e8c51.jpg" alt="" style="width: 30%;">
+<img src="https://user-images.githubusercontent.com/89490762/188228161-879c6d81-486f-4c34-89f8-8d8132c19417.jpg" alt="" style="width: 30%;">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Como executar o código
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Para rodar este código é necessário ter o [Flutter](https://flutter.dev/) e o [Android Studio](https://developer.android.com/studio) instalados.
+
+- Clone o repositório, abra o terminal do sistema na raiz do projeto.
+- Digite o comando "flutter pub get" para instalar as dependências do projeto.
+- Abra o emulador de android.
+- Digite o comando "flutter run -d android" para abrir o app no emulador.
+
+## Download do APK para instalação
+[Download](https://github.com/joaopjrn/teste-escribo03/releases)
