@@ -6,10 +6,7 @@ Desenvolver um aplicativo de listagem de filmes e personagens de Star Wars
 
 ## Preview
 
-<img src="https://user-images.githubusercontent.com/89490762/188228142-cf7c8d52-78fb-4e07-9b2c-b9cf066e50b6.jpg" alt="" style="width: 30%;">
-<img src="https://user-images.githubusercontent.com/89490762/188228154-a0d92c3b-66e3-4061-a33d-76a6f0fdf201.jpg" alt="" style="width: 30%;">
-<img src="https://user-images.githubusercontent.com/89490762/188228155-f3e58178-0940-4e30-a42c-e54e5f9e8c51.jpg" alt="" style="width: 30%;">
-<img src="https://user-images.githubusercontent.com/89490762/188228161-879c6d81-486f-4c34-89f8-8d8132c19417.jpg" alt="" style="width: 30%;">
+<img src="https://user-images.githubusercontent.com/89490762/188228142-cf7c8d52-78fb-4e07-9b2c-b9cf066e50b6.jpg" alt="" style="width: 34%;"> . <img src="https://user-images.githubusercontent.com/89490762/188228154-a0d92c3b-66e3-4061-a33d-76a6f0fdf201.jpg" alt="" style="width: 34%;"> <img src="https://user-images.githubusercontent.com/89490762/188228155-f3e58178-0940-4e30-a42c-e54e5f9e8c51.jpg" alt="" style="width: 34%;"> . <img src="https://user-images.githubusercontent.com/89490762/188228161-879c6d81-486f-4c34-89f8-8d8132c19417.jpg" alt="" style="width: 34%;">
 
 ## Como executar o código
 
