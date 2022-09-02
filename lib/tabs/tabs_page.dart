@@ -1,4 +1,4 @@
-import 'package:escribo03/filmes/favoritos_page.dart';
+import 'package:escribo03/favoritos/favoritos_page.dart';
 import 'package:escribo03/filmes/filmes_page.dart';
 import 'package:escribo03/personagens/personagens_page.dart';
 import 'package:flutter/material.dart';

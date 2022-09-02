@@ -6,8 +6,8 @@ class DBHelper {
   static Future<sql.Database> database() async {
     final dbPath = await sql.getDatabasesPath();
     return sql.openDatabase(path.join(dbPath, 'sw.db'),
-    onCreate: (db, version) {
-      return db.execute('''
+    onCreate: (db, version) async {
+      await db.execute('''
         CREATE TABLE `favoritos` (
           `_id` VARCHAR(50) NOT NULL,
           `tipo` VARCHAR(255) NOT NULL,
@@ -29,6 +29,25 @@ class DBHelper {
           `graphicType` INT NOT NULL
         );
       ''');
+      await db.execute('''
+        CREATE TABLE `avatar` (
+          `_id` VARCHAR(255) DEFAULT 'myavatar',
+          `topType` INT NOT NULL,
+          `accessoriesType` INT NOT NULL,
+          `hairColor` INT NOT NULL,
+          `facialHairType` INT NOT NULL,
+          `facialHairColor` INT NOT NULL,
+          `clotheType` INT NOT NULL,
+          `eyeType` INT NOT NULL,
+          `eyebrowType` INT NOT NULL,
+          `mouthType` INT NOT NULL,
+          `skinColor` INT NOT NULL,
+          `clotheColor` INT NOT NULL,
+          `style` INT NOT NULL,
+          `graphicType` INT NOT NULL,
+          PRIMARY KEY (`_id`)
+        );
+      ''');
       }, version: 1);
   }
 
@@ -44,6 +63,17 @@ class DBHelper {
       where: '_id = ?',
       whereArgs: [id]
     );
+  }
+
+  
+  static Future update(String tabela, dynamic data) async {
+    final db = await DBHelper.database();
+    var up = await db.update(
+      'avatar', 
+      data,
+      where: '_id = ?',
+      whereArgs: ['myavatar']);
+      print(up);
   }
 
   static Future<List<Map<String, dynamic>>> getData(String tabela) async {

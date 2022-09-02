@@ -1,14 +1,19 @@
+import 'dart:convert';
+
 import 'package:escribo03/appbar/my_tab.dart';
 import 'package:escribo03/avatar/avatar_page.dart';
+import 'package:escribo03/avatar/avatar_provider.dart';
 import 'package:escribo03/favoritos/favorito_model.dart';
 import 'package:escribo03/favoritos/favoritos_provider.dart';
-import 'package:escribo03/filmes/favoritos_page.dart';
+import 'package:escribo03/favoritos/favoritos_page.dart';
 import 'package:escribo03/filmes/filmes_page.dart';
 import 'package:escribo03/personagens/personagens_page.dart';
 import 'package:escribo03/tabs/tabs_page.dart';
 import 'package:escribo03/webview/webview_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermoji/fluttermoji.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart' as svg;
 
 enum Page {
   Tabs,
@@ -61,6 +66,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   AppBar _myAppbar(){
+    Provider.of<MyAvatar>(context, listen: false).fetchAvatar();
     return AppBar(
       title: Text(title, style: const TextStyle(color: Colors.white)),
       backgroundColor: Colors.grey[900],
@@ -69,9 +75,42 @@ class _HomePageState extends State<HomePage> {
           onPressed: ()=>_setPage(Page.WebView), 
           icon: const Icon(Icons.public)),
       actions: [
-        IconButton(
-          onPressed: ()=>_setPage(Page.Avatar), 
-          icon: const Icon(Icons.person))
+        Consumer<MyAvatar>(
+          builder: (context, value, _) {
+            print('teste');
+            return InkWell(
+            borderRadius: BorderRadius.circular(50),
+            onTap: ()=>_setPage(Page.Avatar),
+            child: svg.SvgPicture.string(
+              FluttermojiFunctions().decodeFluttermojifromString(jsonEncode(value.defAavatar)),
+              height: 40,
+              ),
+          );
+          },
+        )
+        // FutureBuilder(
+        //   future: Provider.of<MyAvatar>(context).fetchAvatar(),
+        //   builder: (ctx, AsyncSnapshot snap) {
+        //     var conn = snap.connectionState;
+        //     print('avatar');
+        //     print(conn);
+        //     return conn == ConnectionState.done ? Consumer<MyAvatar>(
+        //       builder: (context, value, _) {
+        //         return InkWell(
+        //         borderRadius: BorderRadius.circular(50),
+        //         onTap: ()=>_setPage(Page.Avatar),
+        //         child: svg.SvgPicture.string(
+        //           FluttermojiFunctions().decodeFluttermojifromString(snap.data),
+        //           height: 40,
+        //           ),
+        //       );
+        //       },
+        //     ) : Icon(Icons.person);
+        //   //   return IconButton(
+        //   // onPressed: ()=>_setPage(Page.Avatar), 
+        //   // icon: const Icon(Icons.person));
+        //   },
+        // )
       ],
       bottom: page == Page.Tabs ? _myTabbar() : null,
     );

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:escribo03/avatar/avatar_provider.dart';
 import 'package:escribo03/favoritos/favoritos_provider.dart';
 import 'package:escribo03/filmes/filmes_provider.dart';
 import 'package:escribo03/helpers/http_override.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Filmes()),
         ChangeNotifierProvider(create: (context) => Personagens()),
         ChangeNotifierProvider(create: (context) => Favoritos()),
+        ChangeNotifierProvider(create: (context) => MyAvatar()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
