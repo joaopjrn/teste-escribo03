@@ -1,12 +1,16 @@
+import 'package:escribo03/db/db_helper.dart';
+import 'package:escribo03/favoritos/favoritos_provider.dart';
 import 'package:escribo03/filmes/filme_model.dart';
 import 'package:escribo03/personagens/personagem_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
 class MyListItem extends StatefulWidget {
   final dynamic item;
-  const MyListItem({Key? key, required this.item}) : super(key: key);
+  bool isFav;
+  MyListItem({Key? key, required this.item, this.isFav = false}) : super(key: key);
 
   @override
   State<MyListItem> createState() => _MyListItemState();
@@ -42,13 +46,25 @@ class _MyListItemState extends State<MyListItem> {
 
   @override
   Widget build(BuildContext context) {
+    var fp = Provider.of<Favoritos>(context);
+    widget.isFav = fp.isFavorite(widget.item.id.toString());
     return Card(
       child: ListTile(
         leading: _getIcon(),
         title: _getTitle(),
         trailing: IconButton(
-          onPressed: (){}, 
-          icon: Icon(Icons.star)),
+          onPressed: () async {
+            fp.toggleFavorite({
+              '_id': widget.item.id,
+              'tipo': widget.item is Filme ? 'filme' : 'personagem'
+              }
+            );
+            // print(await DBHelper.insert('favoritos', {
+            //   '_id': widget.item.id,
+            //   'tipo': widget.item is Filme ? 'filme' : 'personagem'
+            // }));
+          }, 
+          icon: Icon(widget.isFav ? Icons.star : Icons.star_border, color: Colors.yellow[700],)),
       ),
     );
   }

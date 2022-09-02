@@ -1,7 +1,11 @@
 import 'package:escribo03/appbar/my_tab.dart';
+import 'package:escribo03/favoritos/favorito_model.dart';
+import 'package:escribo03/favoritos/favoritos_provider.dart';
+import 'package:escribo03/filmes/favoritos_page.dart';
 import 'package:escribo03/filmes/filmes_page.dart';
 import 'package:escribo03/personagens/personagens_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,22 +38,22 @@ class _HomePageState extends State<HomePage> {
       centerTitle: true,
       leading: IconButton(
           onPressed: (){}, 
-          icon: Icon(Icons.public)),
+          icon: const Icon(Icons.public)),
       actions: [
         IconButton(
           onPressed: (){}, 
-          icon: Icon(Icons.person))
+          icon: const Icon(Icons.person))
       ],
       bottom: _myTabbar(),
     );
   }
 
   Widget _body(){
-    return TabBarView(
+    return const TabBarView(
       children: [
         Center(child: FilmesPage()),
         Center(child: PersonagensPage(),),
-        Center()
+        Center(child: FavoritosPage(),)
       ]
     );
   }
@@ -60,7 +64,17 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
         appBar: _myAppbar(),
-        body: _body(),
+        body: Center(
+          child: FutureBuilder(
+            future: Provider.of<Favoritos>(context, listen: false).fetchFavoritos(),
+            builder: (ctx, AsyncSnapshot<List<Favorito>> snap) {
+              var conn = snap.connectionState;
+              print(conn);
+              return conn == ConnectionState.done && !snap.hasError ? _body()
+              : CircularProgressIndicator();
+            },
+          ),
+        ),
       ),
     );
   }

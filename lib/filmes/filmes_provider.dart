@@ -25,4 +25,8 @@ class Filmes with ChangeNotifier {
     }
         return filmes;
   }
+
+  String findNameById(int id) {
+    return filmes.firstWhere((filme) => filme.id == id).title;
+  }
 }

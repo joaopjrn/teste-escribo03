@@ -30,4 +30,8 @@ class Personagens with ChangeNotifier {
     return personagens;
   }
 
+    String findNameById(String id) {
+    return personagens.firstWhere((p) => p.id == id).nome;
+  }
+
 }

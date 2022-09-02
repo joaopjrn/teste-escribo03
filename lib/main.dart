@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:escribo03/favoritos/favoritos_provider.dart';
 import 'package:escribo03/filmes/filmes_provider.dart';
 import 'package:escribo03/helpers/http_override.dart';
 import 'package:escribo03/homepage.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => Filmes()),
         ChangeNotifierProvider(create: (context) => Personagens()),
+        ChangeNotifierProvider(create: (context) => Favoritos()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
