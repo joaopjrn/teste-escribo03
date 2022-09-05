@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
             return Favoritos(filmes, personagens);
           }
         ),
-        // ChangeNotifierProvider(create: (context) => Favoritos()),
         ChangeNotifierProvider(create: (context) => MyAvatar()),
       ],
       child: MaterialApp(
