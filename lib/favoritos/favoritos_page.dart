@@ -10,21 +10,21 @@ class FavoritosPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var pf = Provider.of<Filmes>(context);
-    var pp = Provider.of<Personagens>(context);
-    var pfav = Provider.of<Favoritos>(context);
+    return Consumer<Favoritos>(
+      builder: (context, value, _) {
+        if(value.filmesState!.shouldFetch()) value.filmesState!.fetchFilmes();
+        if(value.personagensState!.shouldFetch()) value.personagensState!.fetchPersonagens();
+        bool loaded = value.filmesState!.filmes.isNotEmpty && value.personagensState!.personagens.isNotEmpty;
 
-    if(pf.filmes.isEmpty && !pf.isFetching) Provider.of<Filmes>(context, listen: false).fetchFilmes();
-    if(pp.personagens.isEmpty && !pp.isFetching) Provider.of<Personagens>(context, listen: false).fetchPersonagens();
-    bool loaded = pf.filmes.isNotEmpty && pp.personagens.isNotEmpty;
-
-    return loaded && pfav.favoritos.isNotEmpty ? ListView.builder(
-      itemCount: pfav.favoritos.length,
-      itemBuilder: (ctx, i) {
-        return ItemFavorito(item: pfav.favoritos[i]);
-      }
-    ) 
-    : loaded && pfav.favoritos.isEmpty 
-    ? const Center(child: Text('Nenhum favorito adicionado!'),) : const CircularProgressIndicator();
+        return loaded && value.favoritos.isNotEmpty ? ListView.builder(
+          itemCount: value.favoritos.length,
+          itemBuilder: (ctx, i) {
+            return ItemFavorito(item: value.favoritos[i]);
+          }
+        ) 
+        : loaded && value.favoritos.isEmpty 
+        ? const Center(child: Text('Nenhum favorito adicionado!'),) : const CircularProgressIndicator();
+      } ,
+    );
   }
 }

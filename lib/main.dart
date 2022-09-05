@@ -24,7 +24,13 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => Filmes()),
         ChangeNotifierProvider(create: (context) => Personagens()),
-        ChangeNotifierProvider(create: (context) => Favoritos()),
+        ChangeNotifierProxyProvider2<Filmes, Personagens, Favoritos>(
+          create: (ctx) => Favoritos(null, null), 
+          update: (ctx, filmes, personagens, prevFavs) { //prevFavs => versão anterior do state de favoritos
+            return Favoritos(filmes, personagens);
+          }
+        ),
+        // ChangeNotifierProvider(create: (context) => Favoritos()),
         ChangeNotifierProvider(create: (context) => MyAvatar()),
       ],
       child: MaterialApp(

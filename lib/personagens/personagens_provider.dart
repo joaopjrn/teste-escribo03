@@ -33,4 +33,8 @@ class Personagens with ChangeNotifier {
     return personagens.firstWhere((p) => p.id == id).nome;
   }
 
+  bool shouldFetch(){
+    return _personagens.isEmpty && !_isFetching;
+  }
+
 }

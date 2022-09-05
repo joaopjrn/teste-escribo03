@@ -31,4 +31,8 @@ class Filmes with ChangeNotifier {
   String findNameById(int id) {
     return filmes.firstWhere((filme) => filme.id == id).title;
   }
+
+  bool shouldFetch(){
+    return _filmes.isEmpty && !_isFetching;
+  }
 }

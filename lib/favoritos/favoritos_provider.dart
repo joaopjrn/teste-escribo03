@@ -1,11 +1,18 @@
 import 'package:escribo03/db/db_helper.dart';
 import 'package:escribo03/favoritos/favorito_model.dart';
+import 'package:escribo03/filmes/filmes_provider.dart';
+import 'package:escribo03/personagens/personagens_provider.dart';
 import 'package:flutter/cupertino.dart';
 
 class Favoritos with ChangeNotifier {
+  final Filmes? filmesState;
+  final Personagens? personagensState;
+
   List<Favorito> _favoritos = [];
   List<Favorito> get favoritos => [..._favoritos];
   bool _fetched = false;
+
+  Favoritos(this.filmesState, this.personagensState);
   
   Future<List<Favorito>> fetchFavoritos() async {
     if(!_fetched){
